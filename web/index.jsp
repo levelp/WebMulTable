@@ -1,3 +1,4 @@
+<%@ page import="calc.Calc" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,6 +22,8 @@
     // request = (HttpServletRequest) pageContext.getRequest();
     String rowsStr = request.getParameter("rows");
     String colsStr = request.getParameter("cols");
+
+    Calc calc = new Calc();
 %>
 
 rows = <%=rowsStr%><br>
@@ -34,11 +37,15 @@ cols = <%=colsStr%><br>
     <tr>
         <% for (int j = 1; j <= cols; j++) { %>
         <td><%=i * j %>
+            <% calc.addValue(i * j); %>
         </td>
         <% } %>
     </tr>
     <% } %>
 </table>
+
+Среднее значение для таблицы: <%=calc.calcAverage()%><br>
+Вычисления из внешнего класса: <%=Calc.doSomeCalculations()%>
 
 </body>
 </html>
